@@ -1,12 +1,23 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const CPF = require('cpf');
 
 const cpfSchema = new mongoose.Schema({
-    cpf: String,
-    isValid: Boolean,
+    cpf: {
+        type: String,
+        required: true,
+        unique: true,
+        validate: {
+            validator: cpf => CPF.isValid(cpf),
+            message: props => `${props.value} is not a valid cpf`,
+        },
+        set: cpf => cpf.replace(/\D/g,''),
+    },
+    isValid: {
+        type: Boolean,
+        default: true,
+    },
 });
 
-module.exports = {
-    Cpf: mongoose.model('Cpf', cpfSchema),
-};
+module.exports = mongoose.model('Cpf', cpfSchema);
