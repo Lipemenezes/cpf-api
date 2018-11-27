@@ -11,7 +11,6 @@ module.exports = () => {
     app.set('views', './app/views');
 
     consign({ cwd: 'app' })
-        .then('models')
         .include('controllers')
         .then('routes')
         .into(app);

@@ -1,11 +1,11 @@
 {
-  "name": "cpf",
+  "name": "cpf_validator",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon --inspect server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nodemon --exec \"mocha --inspect\"",
     "lint": "eslint app"
   },
   "keywords": [
@@ -16,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "consign": "^0.1.6",
+    "cpf": "^1.0.6",
     "express": "^4.16.4",
     "mongoose": "^5.3.13"
   },

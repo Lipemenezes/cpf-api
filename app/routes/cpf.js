@@ -1,8 +1,6 @@
 'use strict';
 
-
-
-module.exports = function (app) {
+module.exports = app => {
     const controller = app.controllers.cpf;
     app.get('/cpf?', controller.get);
 };
