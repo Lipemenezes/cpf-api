@@ -1,7 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const CPF = require('cpf');
+const cpfValidator = require('cpf');
 
 const cpfSchema = new mongoose.Schema({
     cpf: {
@@ -9,10 +9,10 @@ const cpfSchema = new mongoose.Schema({
         required: true,
         unique: true,
         validate: {
-            validator: cpf => CPF.isValid(cpf),
+            validator: cpf => cpfValidator.isValid(cpf),
             message: props => `${props.value} is not a valid cpf`,
         },
-        set: cpf => cpf.replace(/\D/g,''),
+        set: cpf => cpfValidator.clear(cpf),
     },
     isValid: {
         type: Boolean,

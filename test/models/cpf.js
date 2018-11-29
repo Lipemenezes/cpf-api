@@ -1,35 +1,35 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const expect = require('chai').expect;
-const Cpf = require('../../app/models/Cpf.js');
+const cpfValidator = require('cpf');
+const Cpf = mongoose.model('Cpf');
 
 describe('Model CPF', () => {
 
-    before(done => {
-        mongoose.connect('mongodb://localhost/cpf_tests');
-        mongoose.connection.once('open', () => {
-            done();
-        });
-    });
-
-    beforeEach(() => {
-        mongoose.connection.db.dropDatabase();
-    });
-
     describe('validation', () => {
 
-        it('valid cpf, save', done => {
-            var cpf = new Cpf({
-                cpf: '986.475.380-05',
+        before(done => {
+            mongoose.connect('mongodb://localhost/cpf_tests');
+            mongoose.connection.once('open', () => {
+                // Cpf.remove({});
+                done();
             });
-
-            cpf.save(done);
         });
 
-        it('invalid cpf, throw error and dont save', done => {
+        it('valid cpf, should not throw error', done => {
             var cpf = new Cpf({
-                cpf: '986.475.380-056',
+                cpf: cpfValidator.generate(true),
+            });
+
+            cpf.save(err => {
+                if (err) throw new Error('Should not generate error!');
+                done();
+            });
+        });
+
+        it('invalid cpf, should throw error', done => {
+            var cpf = new Cpf({
+                cpf: cpfValidator.generate(true) + '1',
                 isValid: true,
             });
 
