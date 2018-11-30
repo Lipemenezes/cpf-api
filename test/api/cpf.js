@@ -24,6 +24,10 @@ describe('API CPF', () => {
             });
     };
 
+    const error = err => {
+        if (err) throw new Error('Failed');
+    };
+
     before(done => {
         mongoose.connect('mongodb://localhost/cpf_tests');
         mongoose.connection.once('open', () => {
@@ -45,6 +49,7 @@ describe('API CPF', () => {
             chai.request(server)
                 .get('/cpf')
                 .end(async (err, res) => {
+                    error(err);
                     res.should.have.status(200);
                     expect(res.body.cpfs.length).to.be.above(0);
                     done();                    
@@ -56,6 +61,7 @@ describe('API CPF', () => {
         const cpf = '204.773.310-33';
         
         doPost({ cpf }, (err, res) => {
+            error(err);
             res.should.have.status(200);
             res.body.cpf.should.be.eql(cpf);
             res.body.isValid.should.be.eql(true);
@@ -67,7 +73,9 @@ describe('API CPF', () => {
         const cpf = '316.500.310-68';
 
         doPost({ cpf } , (err, res) => {
+            error(err);
             doPost({ cpf, isValid: false } , (err, res) => {
+                error(err);
                 res.should.have.status(200);
                 res.body.cpf.should.be.eql(cpf);
                 res.body.isValid.should.be.eql(false);

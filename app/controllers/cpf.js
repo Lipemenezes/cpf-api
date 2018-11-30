@@ -32,9 +32,9 @@ module.exports = {
         // validar params.cpf
 
         const updatedCpf = await Cpf.findOneAndUpdate(
-            { cpf: params.cpf }, 
-            { $set: params }, 
-            { upsert: true, new: true },
+            { cpf: params.cpf },
+            { $set: params },
+            { upsert: true, new: true, setDefaultsOnInsert: true, runValidators: true },
         );
         
         res.json({

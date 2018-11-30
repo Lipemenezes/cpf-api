@@ -17,6 +17,11 @@ const cpfSchema = new mongoose.Schema({
     isValid: {
         type: Boolean,
         default: true,
+        index: true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now(),
     },
 });
 
