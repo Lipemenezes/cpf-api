@@ -16,6 +16,11 @@ describe('Model CPF', () => {
             });
         });
 
+        beforeEach(done => {
+            Cpf.remove({});
+            done();
+        });
+
         it('valid cpf, should not throw error', done => {
             var cpf = new Cpf({
                 cpf: cpfValidator.generate(true),

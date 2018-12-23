@@ -19,6 +19,11 @@ const cpfSchema = new mongoose.Schema({
         default: true,
         index: true,
     },
+    isDeleted: {
+        type: Boolean,
+        default: false,
+        index: true,
+    },
     createdAt: {
         type: Date,
         default: Date.now(),
