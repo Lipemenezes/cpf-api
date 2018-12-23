@@ -4,14 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect server.js",
-    "test": "nodemon --exec \"mocha --inspect\"",
+    "start": "nodemon --inspect=0.0.0.0:9229 server.js",
+    "test": "MONGO_DB_NAME=cpf_tests nodemon --exec \"mocha --inspect=0.0.0.0:9229\"",
     "lint": "eslint app"
   },
-  "keywords": [
-    "youtube",
-    "timetracker"
-  ],
+  "keywords": [],
   "author": "Felipe Menezes <lipe.menezes@live.com> (https://www.github.com/lipemenezes)",
   "license": "MIT",
   "dependencies": {

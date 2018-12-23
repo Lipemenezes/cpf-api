@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 const chai = require('chai');
+const should = chai.should();
 const expect = chai.expect;
 const chaiHttp = require('chai-http');
 
@@ -17,21 +18,12 @@ describe('API CPF', () => {
             .post('/cpf')
             .set('content-type', 'application/json')
             .send(cpfObj)
-            .end((err, res) => {
-                cb(err, res);
-            });
+            .end(cb);
     };
 
     const error = err => {
         if (err) throw new Error('Failed');
     };
-
-    before(done => { // TODO externalizar p/ não precisar repetir em todos testes
-        mongoose.connect('mongodb://localhost/cpf_tests');
-        mongoose.connection.once('open', () => {
-            done();
-        });
-    });
 
     beforeEach(done => {
         Cpf.remove({}, done);

@@ -8,14 +8,6 @@ describe('Model CPF', () => {
 
     describe('validation', () => {
 
-        before(done => {
-            mongoose.connect('mongodb://localhost/cpf_tests');
-            mongoose.connection.once('open', () => {
-                // Cpf.remove({});
-                done();
-            });
-        });
-
         beforeEach(done => {
             Cpf.remove({});
             done();
