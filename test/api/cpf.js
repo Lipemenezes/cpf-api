@@ -2,10 +2,8 @@
 
 const mongoose = require('mongoose');
 const chai = require('chai');
-const should = chai.should();
 const expect = chai.expect;
 const chaiHttp = require('chai-http');
-const cpfValidator = require('cpf');
 
 const server = require('../../server');
 const Cpf = mongoose.model('Cpf');
