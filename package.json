@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect=0.0.0.0:9229 server.js",
+    "start": "node server.js",
     "test": "MONGO_DB_NAME=cpf_tests nodemon --exec \"mocha --inspect=0.0.0.0:9229\"",
     "lint": "eslint app"
   },
