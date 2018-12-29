@@ -4,13 +4,14 @@ const express = require('express');
 const consign = require('consign');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const DEFAULT_PORT = 3000;
 
 module.exports = () => {
     const app = express();
     app.set('port', process.env.port || DEFAULT_PORT);
-    app.use(express.static('./public'));
+    app.use(cors());
     app.use(bodyParser.json());
 
     consign({ cwd: 'app' })
